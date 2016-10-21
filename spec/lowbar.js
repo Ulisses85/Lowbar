@@ -40,8 +40,8 @@ describe('_', function () {
       expect(_.last([1,2,3,80,7],2)).to.eql([80,7]);
     });
   });
-  describe('#each', function () {
-    it('is a function', function() {
+  describe('_.each', function(){
+    it('is a function' , function(){
       expect(_.each).to.be.a('function');
     });
   });
