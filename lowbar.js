@@ -10,8 +10,12 @@ _.first = function(array, n) {
     return array.slice(0, n);
   }
 };
-_.last = function() {
-
+_.last = function(array, n) {
+if (!n){
+  return array[array.length-1];
+}else{
+  return array.slice(array.length - n);
+}
 };
 
 if (typeof module !== 'undefined') {
