@@ -33,6 +33,12 @@ describe('_', function () {
     it('is a function', function (){
       expect(_.last).to.be.a('function');
     });
+    it('Returns last element of the array', function(){
+      expect(_.last([1,2,3,4,80])).to.equal(80);
+    });
+    it('Returns the last n elements of the array', function(){
+      expect(_.last([1,2,3,80,7],2)).to.eql([80,7]);
+    });
   });
   describe('#each', function () {
     it('is a function', function() {
