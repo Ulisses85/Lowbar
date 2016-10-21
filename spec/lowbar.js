@@ -28,6 +28,9 @@ describe('_', function () {
     it('Returns the first element in the array', function () {
       expect(_.first([1,2,3,4,5])).to.equal(1);
     });
+    it('Returns the first n elements of the array', function () {
+      expect(_.first([1,2,3,4,5],3)).to.eql([1,2,3]);
+    });
   });
   describe('#each', function () {
     it('is a function', function() {
