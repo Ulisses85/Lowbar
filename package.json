@@ -3,9 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "dependencies": {
+    "underscore": "^1.8.3"
   },
   "scripts": {
     "test": "mocha ./spec/",
     "lint": "semistandard --verbose | snazzy"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0"
   }
 }
