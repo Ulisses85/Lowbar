@@ -10,6 +10,9 @@ _.first = function(array, n) {
     return array.slice(0, n);
   }
 };
+_.last = function() {
+
+};
 
 if (typeof module !== 'undefined') {
   module.exports = _;
