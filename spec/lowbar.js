@@ -29,6 +29,11 @@ describe('_', function () {
       expect(_.first([1,2,3,4,5])).to.equal(1);
     });
   });
+  describe('_.last', function(){
+    it('is a function', function (){
+      expect(_.last).to.be.a('function');
+    });
+  });
   describe('#each', function () {
     it('is a function', function() {
       expect(_.each).to.be.a('function');
