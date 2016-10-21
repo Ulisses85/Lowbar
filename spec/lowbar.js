@@ -19,7 +19,12 @@ describe('_', function () {
     });
     it('returns undefined is no arguement is passed', function () {
       expect(_.indentity()).to.equal(undefined);
-    })
+    });
+  });
+  describe('_.first', function () {
+    it('is a function', function () {
+      expect(_.first).to.be.a('function');
+    });
   });
   describe('#each', function () {
     it('is a function', function() {
