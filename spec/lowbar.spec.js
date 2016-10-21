@@ -40,12 +40,19 @@ describe('_', function () {
       expect(_.last([1,2,3,80,7],2)).to.eql([80,7]);
     });
   });
-  describe('_.each', function(){
+  describe('_.each', function () {
     it('is a function' , function(){
       expect(_.each).to.be.a('function');
     });
     it('Returns undefined if no arguments passed', function(){
       expect (_.each()).to.equal(undefined);
+    });
+    it('passes each element of the array as the first argument to the iteratee function', function () {
+      var result = [];
+      _.each([1,2,3], function (num) {
+        result.push(num * 2);
+      });
+      expect(result).to.eql([2, 4, 6]);
     });
   });
 });
