@@ -44,5 +44,8 @@ describe('_', function () {
     it('is a function' , function(){
       expect(_.each).to.be.a('function');
     });
+    it('Returns undefined if no arguments passed', function(){
+      expect (_.each()).to.equal(undefined);
+    });
   });
 });
