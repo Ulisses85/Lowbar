@@ -1,7 +1,7 @@
 var _ = {};
 
-_.each = function() {
-  // your code here 
+_.indentity = function(a) {
+  return a;
 };
 
 if (typeof module !== 'undefined') {
