@@ -25,9 +25,9 @@ describe('_', function () {
     it('is a function', function () {
       expect(_.first).to.be.a('function');
     });
-    it('Returns an element', function () {
-      expect(_.first()).to.equal('element');
-    })
+    it('Returns the first element in the array', function () {
+      expect(_.first([1,2,3,4,5])).to.equal(1);
+    });
   });
   describe('#each', function () {
     it('is a function', function() {
