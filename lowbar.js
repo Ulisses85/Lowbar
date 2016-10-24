@@ -1,21 +1,40 @@
 var _ = {};
 
-_.indentity = function(a) {
+_.indentity = function (a) {
   return a;
 };
-_.first = function(array, n) {
+_.first = function (array, n) {
   if (!n) {
     return array[0];
   } else {
     return array.slice(0, n);
   }
 };
-_.last = function(array, n) {
-if (!n){
-  return array[array.length-1];
-}else{
-  return array.slice(array.length - n);
-}
+_.last = function (array, n) {
+  if (!n) {
+    return array[array.length - 1];
+  } else {
+    return array.slice(array.length - n);
+  }
+};
+_.each = function () {
+
+};
+_.indexOf = function (array, n) {
+  if (!n) {
+    return -1;
+  } else {
+    return array.indexOf(n);
+  };
+};
+_.filter = function () {
+
+};
+_.reject = function () {
+
+};
+_.uniq = function () {
+
 };
 
 if (typeof module !== 'undefined') {
