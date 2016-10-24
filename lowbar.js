@@ -17,6 +17,9 @@ if (!n){
   return array.slice(array.length - n);
 }
 };
+_.each = function() {
+
+};
 
 if (typeof module !== 'undefined') {
   module.exports = _;
