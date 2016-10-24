@@ -43,12 +43,12 @@ describe('_', function () {
       expect(_.last([1, 2, 3, 80, 7], 2)).to.eql([80, 7]);
     });
   });
-  xdescribe('_.each', function () {
+  describe('_.each', function () {
     it('is a function', function () {
       expect(_.each).to.be.a('function');
     });
-    it('Returns undefined if no arguments passed', function () {
-      expect(_.each()).to.equal(undefined);
+    xit('FIX - Returns null if no arguments passed', function () {
+      expect(_.each()).to.eql();
     });
     it('passes each element of the array as the first argument to the iteratee function', function () {
       var result = [];
@@ -57,8 +57,6 @@ describe('_', function () {
       });
       expect(result).to.eql([2, 4, 6]);
     });
-    // Could we test here for if an unexpected item is passed?
-    // THIS IS WHERE WE FINISHED ON FRIDAY!!!!
   });
   describe('_.indexOf', function () {
     it('Returns the index at which value can be found', function () {
@@ -67,28 +65,22 @@ describe('_', function () {
     it('Returns -1 if n is not passed', function () {
       expect(_.indexOf([1, 2, 3, 4, 5])).to.equal(-1);
     });
+    it('Returns -1 if n is not present in the array', function () {
+      expect(_.indexOf([1, 2, 3, 4, 5]), 'string').to.equal(-1);
+    });
+    it('Returns -1 if the falsey value', function () {
+      expect(_.indexOf([1, 2, 3, 4, 5]), '5').to.equal(-1);
+    });
   });
-  xdescribe('_filter', function () {
+  describe('_filter', function () {
+    it('is a function', function () {
+      expect(_.filter).to.be.a('function');
+    });
     it('Returns an array of values that pass a truth test', function () {
-      var result = [];
-      _.filter([1, 2, 3, 4, 5, 6], function (num) {
-        result.push(num % 2 === 0);
-      });
-      expect(result).to.eql([2, 4, 6]);
-    });
-    it('Returns an empty array if no array is passed', function () {
-      var result = [];
-      _.filter([], function (num) {
-        result.push(num % 2 === 0);
-      });
-      expect(result).to.eql([]);
-    });
-    it('Returns an empty array if no values pass the truth test', function () {
-      var result = [];
-      _.filter([1, 9, 3, 7, 5], function (num) {
-        result.push(num % 2 === 0);
-      });
-      expect(result).to.eql([]);
+      var result = _.filter([1, 2, 3, 4, 5], function (num) {
+        return num % 2 === 0;
+      })
+      expect(result).to.eql([2, 4]);
     });
   });
   xdescribe('_.reject', function () {

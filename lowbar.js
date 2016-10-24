@@ -17,19 +17,39 @@ _.last = function (array, n) {
     return array.slice(array.length - n);
   }
 };
-_.each = function () {
-
+_.each = function (array, iteree) {
+  for (var i = 0; i < array.length; i++) {
+    if (!array) {
+      return null;
+    } else {
+      iteree(array[i], i);
+    }
+  }
 };
 _.indexOf = function (array, n) {
   if (!n) {
     return -1;
   } else {
     return array.indexOf(n);
-  };
+  }
 };
-_.filter = function () {
 
+_.filter = function (array, predicate) {
+  //create a new array
+    //Look at each item in the array
+      // if it passes a the predicate
+        //put it into a new array
+    //return the new array of filtered values.
+
+  var result = [];
+  for (var i = 0; i < array.length; i++) {
+    if (predicate(array[i])) {
+      result.push(array[i]);
+    }
+  }
+  return result;
 };
+
 _.reject = function () {
 
 };
