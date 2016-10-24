@@ -79,36 +79,43 @@ describe('_', function () {
     it('Returns an array of values that pass a truth test', function () {
       var result = _.filter([1, 2, 3, 4, 5], function (num) {
         return num % 2 === 0;
-      })
+      });
       expect(result).to.eql([2, 4]);
     });
+    it('Return an empty array if no array is passed', function () {
+      var result = _.filter([], function (num) {
+        return num % 2 === 0;
+      });
+      expect(result).to.eql([]);
+    });
   });
-  xdescribe('_.reject', function () {
+  describe('_.reject', function () {
     it('Returns the values in list without the elements that pass the truth test', function () {
-      var result = [];
-      _.reject([1, 2, 3, 4, 5], function (num) {
-        result.push(num % 2 === 0);
+      var result = _.reject([1, 2, 3, 4, 5], function (num) {
+        return num % 2 === 0;
       });
       expect(result).to.eql([1, 3, 5]);
     });
     it('Returns an empty array if no array is passed', function () {
-      var result = [];
-      _.reject([], function (num) {
-        result.push(num % 2 === 0);
+      var result = _.reject([], function (num) {
+        return num % 2 === 0;
       });
       expect(result).to.eql([]);
     });
     it('Returns an empty array if no values pass the truth test', function () {
-      var result = [];
-      _.reject([1, 9, 3, 7, 5], function (num) {
-        result.push(num % 2 === 0);
+      var result = _.reject([1, 9, 3, 7, 5], function (num) {
+        return num % 2 === 0;
       });
       expect(result).to.eql([1, 9, 3, 7, 5]);
     });
   });
-  xdescribe('_.uniq', function () {
+  describe('_.uniq', function () {
+    it('Is a function', function () {
+      expect(_.uniq).to.be.a('function');
+    });
     it('Returns a duplicate free version of the array using the first entry as the value', function () {
       expect(_.uniq([1, 1, 2, 8, 3, 8, 9, 9, 10])).to.eql([1, 2, 8, 3, 9, 10]);
+      expect(_.uniq([1, 1, 1, 22, 22, 33])).to.eql([1, 22, 33]);
     });
   });
 });

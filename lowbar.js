@@ -34,27 +34,30 @@ _.indexOf = function (array, n) {
   }
 };
 
-_.filter = function (array, predicate) {
-  //create a new array
-    //Look at each item in the array
-      // if it passes a the predicate
-        //put it into a new array
-    //return the new array of filtered values.
-
+_.filter = function (list, predicate) {
   var result = [];
-  for (var i = 0; i < array.length; i++) {
-    if (predicate(array[i])) {
-      result.push(array[i]);
+  for (var i = 0; i < list.length; i++) {
+    if (predicate(list[i])) {
+      result.push(list[i]);
     }
   }
   return result;
 };
 
-_.reject = function () {
-
+_.reject = function (list, predicate) {
+  var result = [];
+  for (var i = 0; i < list.length; i++) {
+    if (!predicate(list[i])) {
+      result.push(list[i]);
+    }
+  }
+  return result;
 };
-_.uniq = function () {
 
+_.uniq = function (array) {
+  return array.filter(function (element, index, arr) {
+    return arr.indexOf(element) === index;
+  });
 };
 
 if (typeof module !== 'undefined') {
