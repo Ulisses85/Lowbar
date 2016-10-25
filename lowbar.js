@@ -72,7 +72,13 @@ _.map = function (list, iteratee) {
     newArray.push(iteratee(element, i, listA));
   });
   return newArray;
-}
+};
+
+_.pluck = function (list, propertyName) {
+  return _.map(list, function (object) {
+    return object[propertyName];
+  });
+};
 
 if (typeof module !== 'undefined') {
   module.exports = _;
