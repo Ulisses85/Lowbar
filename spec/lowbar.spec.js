@@ -156,4 +156,17 @@ describe('_', function () {
       expect(_.map(numsArray).length).to.equal(numsArray.length);
     });
   });
+  describe('_.pluck', function () {
+    it('is a function which takes two arguements', function () {
+      expect(_.pluck.length).to.equal(2);
+    });
+    it('returns an array of values', function () {
+      var people = [{name: 'Tom', age: 29}, {name: 'Ben', age: 26}];
+      expect(_.pluck(people, 'name')).to.eql(['Tom', 'Ben']);
+    });
+    it('should return an array', function () {
+      var people = [{name: 'Tom', age: 29}, {name: 'Ben', age: 26}];
+      expect(_.pluck(people, 'name')).to.be.an('array');
+    });
+  });
 });
