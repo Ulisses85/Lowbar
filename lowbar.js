@@ -1,6 +1,6 @@
 var _ = {};
 
-_.indentity = function (a) {
+_.identity = function (a) {
   return a;
 };
 _.first = function (array, n) {
@@ -17,15 +17,20 @@ _.last = function (array, n) {
     return array.slice(array.length - n);
   }
 };
-_.each = function (array, iteree) {
-  for (var i = 0; i < array.length; i++) {
-    if (!array) {
-      return null;
-    } else {
-      iteree(array[i], i);
+
+_.each = function (list, iteratee) {
+  iteratee = iteratee || this.identity;
+  if (Array.isArray(list)) {
+    for (var i = 0; i < list.length; i++) {
+      iteratee(list[i], i, list);
+    }
+  } else {
+    for (var key in list) {
+      iteratee(list[key], key, list);
     }
   }
 };
+
 _.indexOf = function (array, n) {
   if (!n) {
     return -1;
@@ -59,6 +64,15 @@ _.uniq = function (array) {
     return arr.indexOf(element) === index;
   });
 };
+
+_.map = function (list, iteratee) {
+  var newArray = [];
+  iteratee = iteratee || _.identity;
+  _.each(list, function (element, i, listA) {
+    newArray.push(iteratee(element, i, listA));
+  });
+  return newArray;
+}
 
 if (typeof module !== 'undefined') {
   module.exports = _;
