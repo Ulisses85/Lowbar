@@ -5,21 +5,24 @@ var expect = require('chai').expect;
 var _ = require(path.join(__dirname, '..', './lowbar.js'));
 var sinon = require('sinon');
 
+////Inputs/////
+var numsArray = [2, 3, 4, 5];
+
 describe('_', function () {
   'use strict';
 
   it('is an object', function () {
     expect(_).to.be.an('object');
   });
-  describe('_.indentity', function () {
+  describe('_.identity', function () {
     it('is a function', function () {
-      expect(_.indentity).to.be.a('function');
+      expect(_.identity).to.be.a('function');
     });
     it('returns the same as the arguement passed', function () {
-      expect(_.indentity(10)).to.equal(10);
+      expect(_.identity(10)).to.equal(10);
     });
     it('returns undefined is no arguement is passed', function () {
-      expect(_.indentity()).to.equal(undefined);
+      expect(_.identity()).to.equal(undefined);
     });
   });
   describe('_.first', function () {
@@ -51,7 +54,7 @@ describe('_', function () {
     xit('FIX - Returns null if no arguments passed', function () {
       expect(_.each()).to.eql();
     });
-    it('passes each element of the array as the first argument to the iteratee function', function () {
+    it('passes each element of the list as the first argument to the iteratee function', function () {
       var result = [];
       _.each([1, 2, 3], function (num) {
         result.push(num * 2);
@@ -117,6 +120,40 @@ describe('_', function () {
     it('Returns a duplicate free version of the array using the first entry as the value', function () {
       expect(_.uniq([1, 1, 2, 8, 3, 8, 9, 9, 10])).to.eql([1, 2, 8, 3, 9, 10]);
       expect(_.uniq([1, 1, 1, 22, 22, 33])).to.eql([1, 22, 33]);
+    });
+  });
+  xdescribe('#reduce', function () {
+    it('Correctly adds all the numbers in the array', function () {
+      var total = _.reduce([1, 2, 3], function (acc, num) {
+        return acc + num;
+      });
+      total.should.equal(6);
+    });
+    it('Correctly maps an array', function () {
+      var doubles = _.reduce([1, 2, 3], function (acc, num) {
+        acc.push(num * 2);
+        return acc;
+      }, []);
+      doubles.should.eql([2, 4, 6]);
+    });
+  });
+  describe('_.map', function () {
+    it('Should be a function', function () {
+      expect(_.map).to.be.a('function');
+    });
+    it('should take two arguements', function () {
+      expect(_.map.length).to.equal(2);
+    });
+    it('should always return an array', function () {
+      expect(_.map()).to.be.an('array');
+    });
+    it('should return augmented values', function () {
+      expect(_.map(numsArray, function (num) {
+        return num * 2;
+      })).to.eql([4, 6, 8, 10]);
+    });
+    it('returned array should be the same length as the input', function () {
+      expect(_.map(numsArray).length).to.equal(numsArray.length);
     });
   });
 });
