@@ -51,9 +51,6 @@ describe('_', function () {
     it('is a function', function () {
       expect(_.each).to.be.a('function');
     });
-    xit('FIX - Returns null if no arguments passed', function () {
-      expect(_.each()).to.eql();
-    });
     it('passes each element of the list as the first argument to the iteratee function', function () {
       var result = [];
       _.each([1, 2, 3], function (num) {
@@ -122,21 +119,6 @@ describe('_', function () {
       expect(_.uniq([1, 1, 1, 22, 22, 33])).to.eql([1, 22, 33]);
     });
   });
-  xdescribe('#reduce', function () {
-    it('Correctly adds all the numbers in the array', function () {
-      var total = _.reduce([1, 2, 3], function (acc, num) {
-        return acc + num;
-      });
-      total.should.equal(6);
-    });
-    it('Correctly maps an array', function () {
-      var doubles = _.reduce([1, 2, 3], function (acc, num) {
-        acc.push(num * 2);
-        return acc;
-      }, []);
-      doubles.should.eql([2, 4, 6]);
-    });
-  });
   describe('_.map', function () {
     it('Should be a function', function () {
       expect(_.map).to.be.a('function');
@@ -167,6 +149,24 @@ describe('_', function () {
     it('should return an array', function () {
       var people = [{name: 'Tom', age: 29}, {name: 'Ben', age: 26}];
       expect(_.pluck(people, 'name')).to.be.an('array');
+    });
+  });
+  describe('#reduce', function () {
+    it('is a function', function () {
+      expect(_.reduce).to.be.a('function');
+    });
+    it('Correctly adds all the numbers in the array', function () {
+      var total = _.reduce([1, 2, 3], function (acc, num) {
+        return acc + num;
+      });
+      total.should.equal(6);
+    });
+    it('Correctly maps an array', function () {
+      var doubles = _.reduce([1, 2, 3], function (acc, num) {
+        acc.push(num * 2);
+        return acc;
+      }, []);
+      doubles.should.eql([2, 4, 6]);
     });
   });
 });
