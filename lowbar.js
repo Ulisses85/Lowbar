@@ -1,22 +1,23 @@
 var _ = {};
 
-_.identity = function (a) {
-  return a;
+_.identity = function (input) {
+  return input;
 };
 
 _.first = function (array, item) {
-  if (!n) {
+  item = item || 1;
+  if (item === 1) {
     return array[0];
-  } else {
-    return array.slice(0, n);
   }
+  return array.slice(0, item);
 };
 
-_.last = function (array, n) {
-  if (!n) {
+_.last = function (array, item) {
+  // TODO: Refactor to do the same as _.first
+  if (!item) {
     return array[array.length - 1];
   } else {
-    return array.slice(array.length - n);
+    return array.slice(array.length - item);
   }
 };
 
@@ -33,12 +34,13 @@ _.each = function (list, iteratee) {
   }
 };
 
-_.indexOf = function (array, n) {
-  if (!n) {
-    return -1;
-  } else {
-    return array.indexOf(n);
+_.indexOf = function (array, value) {
+  for (var i = 0; i < array.length; i++) {
+    if (array[i] === value) {
+      return i;
+    }
   }
+  return -1;
 };
 
 _.filter = function (list, predicate) {
@@ -62,9 +64,13 @@ _.reject = function (list, predicate) {
 };
 
 _.uniq = function (array) {
-  return array.filter(function (element, index, arr) {
-    return arr.indexOf(element) === index;
-  });
+  var newArray = [];
+  for (var i = 0; i < array.length; i++) {
+    if (_.indexOf(newArray, array[i]) === -1) {
+      newArray.push(array[i]);
+    }
+  }
+  return newArray;
 };
 
 _.map = function (list, iteratee) {
@@ -83,9 +89,9 @@ _.pluck = function (list, propertyName) {
 };
 
 _.reduce = function (list, iteratee) {
-  var result = '';
-}
 
+  return;
+};
 
 if (typeof module !== 'undefined') {
   module.exports = _;

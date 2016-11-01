@@ -5,8 +5,7 @@ var expect = require('chai').expect;
 var _ = require(path.join(__dirname, '..', './lowbar.js'));
 var sinon = require('sinon');
 
-////Inputs/////
-var numsArray = [2, 3, 4, 5];
+var numsArray = [2,3,4,5];
 
 describe('_', function () {
   'use strict';
@@ -50,6 +49,23 @@ describe('_', function () {
   describe('_.each', function () {
     it('is a function', function () {
       expect(_.each).to.be.a('function');
+    });
+    it('does not call the iteratee function if it gets an empty list', function () {
+      var spy = sinon.spy();
+      _.each({}, spy);
+      expect(spy.callCount).to.equal(0);
+    });
+    it('calls the iteratee function as many times as elements in the array', function () {
+      var spy = sinon.spy();
+      _.each([1, 2, 3], spy);
+      expect(spy.callCount).to.equal(3);
+    });
+    it('the iteratee gets called with the element as the first arg, the index as the second and the list as the third', function () {
+      var spy = sinon.spy();
+      _.each([1, 2, 3], spy);
+      expect(spy.firstCall.calledWithExactly(1, 0, [1, 2, 3])).to.be.true;
+      expect(spy.secondCall.calledWithExactly(2, 1, [1, 2, 3])).to.be.true;
+      expect(spy.thirdCall.calledWithExactly(3, 2, [1, 2, 3])).to.be.true;
     });
     it('passes each element of the list as the first argument to the iteratee function', function () {
       var result = [];
@@ -151,10 +167,13 @@ describe('_', function () {
       expect(_.pluck(people, 'name')).to.be.an('array');
     });
   });
-  describe('#reduce', function () {
+  describe('_.reduce', function () {
     it('is a function', function () {
       expect(_.reduce).to.be.a('function');
     });
+    it('returns a single value', function () {
+
+    })
     it('Correctly adds all the numbers in the array', function () {
       var total = _.reduce([1, 2, 3], function (acc, num) {
         return acc + num;
