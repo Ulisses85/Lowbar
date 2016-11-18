@@ -5,7 +5,7 @@ var expect = require('chai').expect;
 var _ = require(path.join(__dirname, '..', './lowbar.js'));
 var sinon = require('sinon');
 
-var numsArray = [2,3,4,5];
+var numsArray = [2, 3, 4, 5];
 
 describe('_', function () {
   'use strict';
@@ -172,20 +172,16 @@ describe('_', function () {
       expect(_.reduce).to.be.a('function');
     });
     it('returns a single value', function () {
-
-    })
-    it('Correctly adds all the numbers in the array', function () {
-      var total = _.reduce([1, 2, 3], function (acc, num) {
-        return acc + num;
-      });
-      total.should.equal(6);
     });
-    it('Correctly maps an array', function () {
-      var doubles = _.reduce([1, 2, 3], function (acc, num) {
-        acc.push(num * 2);
-        return acc;
-      }, []);
-      doubles.should.eql([2, 4, 6]);
+    it('should invoke the iterator on the first element when given an accumulator', function () {
+      var sum = function (acc, num) { return acc + num * num; };
+      var result = _.reduce([2, 3], sum, 0);
+      expect(result).to.equal(13);
+    });
+    it('should take first elem as an accumulator when none is specified', function () {
+      var sum = function(acc, num) {return acc + num; };
+      var result = _.reduce([1, 2, 3], sum);
+      expect(result).to.equal(7);
     });
   });
 });

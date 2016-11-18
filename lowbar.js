@@ -88,12 +88,26 @@ _.pluck = function (list, propertyName) {
   });
 };
 
-_.reduce = function (list, iteratee) {
-
-  return;
+_.reduce = function (collection, iterator, accumulator) {
+  if (arguments.length < 3) {
+    accumulator = collection[0];
+  }
+  _.each(collection, function (value) {
+    accumulator = iterator(accumulator, value);
+  });
+  return accumulator;
 };
-_.each = function() {
 
+_.each = function (collection, iterator) {
+  if (Array.isArray(collection)) {
+    for (var i = 0; i < collection.length; i++) {
+      iterator(collection[i], i, collection);
+    }
+  } else {
+    for (var key in collection) {
+      iterator(collection[key], key, collection);
+    }
+  }
 };
 
 if (typeof module !== 'undefined') {
