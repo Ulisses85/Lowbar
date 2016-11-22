@@ -109,6 +109,41 @@ _.each = function (collection, iterator) {
     }
   }
 };
+_.contains = function (collection, target) {
+  return _.reduce(collection, function (match, item) {
+    if (match) {
+      return true;
+    } else {
+      return item === target;
+    }
+  }, false);
+};
+_.every = function () {};
+_.some = function () {};
+_.extends = function () {};
+_.defaults = function () {};
+_.once = function () {};
+_.memoize = function () {};
+_.delay = function () {};
+_.shuffle = function (list) {
+  var shuffled = [];
+  var listCopy = Array.prototype.slice.call(list);
+  var result = [];
+  for (var i = 0; i < list.length; i++) {
+    var random = Math.floor(Math.random() * listCopy.length);
+    result.push(listCopy[random]);
+    listCopy.splice(random, 1);
+  }
+  return result;
+};
+
+_.invoke = function () {};
+_.sortBy = function () {};
+_.zip = function () {};
+_.flatten = function () {};
+_.intersection = function () {};
+_.difference = function () {};
+_.throttle = function () {};
 
 if (typeof module !== 'undefined') {
   module.exports = _;

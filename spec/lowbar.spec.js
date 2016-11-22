@@ -179,9 +179,38 @@ describe('_', function () {
       expect(result).to.equal(13);
     });
     it('should take first elem as an accumulator when none is specified', function () {
-      var sum = function(acc, num) {return acc + num; };
+      var sum = function (acc, num) { return acc + num; };
       var result = _.reduce([1, 2, 3], sum);
       expect(result).to.equal(7);
+    });
+  });
+  describe('_.contains', function () {
+    it('is a function', function () {
+      expect(_.contains).to.be.a('function');
+    });
+    it('should return true for [1,2,3]', function () {
+      expect(_.contains([1, 2, 3], 3)).to.equal(true);
+    });
+    it('should return false for ([1, 2, 3], 4) ', function () {
+      expect(_.contains([1, 2, 3], 4)).to.equal(false);
+    });
+  });
+  describe('_.shuffle', function () {
+    it('original object should not be modified', function () {
+      var list = [11, 20, 33, 40];
+      var shuffled = _.shuffle(list).sort();
+      expect(shuffled).to.not.equal(list);
+      expect(list).to.eql([11, 20, 33, 40]);
+    });
+    it('should have the same elements as the original object', function () {
+      var list = [11, 20, 33, 40];
+      var shuffled = _.shuffle(list).sort();
+      expect(shuffled).to.eql([11, 20, 33, 40]);
+    });
+    it('should have a random order not equal original object', function () {
+      var list = [11, 20, 33, 40];
+      var shuffled = _.shuffle(list);
+      expect(shuffled).to.not.eql([11, 20, 33, 40]);
     });
   });
 });
