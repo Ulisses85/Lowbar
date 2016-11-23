@@ -213,4 +213,29 @@ describe('_', function () {
       expect(shuffled).to.not.eql([11, 20, 33, 40]);
     });
   });
+  describe('every', function () {
+    var isEven = function (num) {
+      return num % 2 === 0;
+    };
+    it('returns true for an empty list', function () {
+      expect(_.every([], _.identity)).to.be.true;
+    });
+    it('returns true for  all-truthy data types', function () {
+      expect(_.every([1, {}, true], _.identity)).to.be.true;
+    });
+    it('returns false for falsy data types', function () {
+      expect(_.every([null, 0, undefined], _.identity)).to.be.false;
+    });
+    it('returns false for falsy and truety values in one list', function () {
+      expect(_.every([true, false, 1], _.identity)).to.be.false;
+      expect(_.every([1, undefined, true], _.identity)).to.be.false;
+    });
+    it('works with undefined value list', function () {
+      expect(_.every([undefined, undefined, undefined], _.identity)).to.be.false;
+    });
+    it('should cast the result to a boolean', function () {
+      expect(_.every([1], _.identity)).to.be.true;
+      expect(_.every([0], _.identity)).to.be.false;
+    });
+  });
 });

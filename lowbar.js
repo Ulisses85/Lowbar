@@ -118,11 +118,33 @@ _.contains = function (collection, target) {
     }
   }, false);
 };
-_.every = function () {};
+_.every = function (collection, iterator) {
+  iterator = iterator || _.identity;
+  return !!_.reduce(collection, function (accumulator, value) {
+    return accumulator && iterator(value);
+  }, true);
+};
 _.some = function () {};
-_.extends = function () {};
+_.extends = function (obj) {
+  _.each(arguments, function (argObject) {
+    _.each(argObject, function (value, key) {
+      obj[key] = value;
+    });
+  });
+  return obj;
+};
 _.defaults = function () {};
-_.once = function () {};
+_.once = function (func) {
+  var callFunc = false;
+  var result;
+  return function () {
+    if (!callFunc) {
+      result = func.apply(this, arguments);
+      callFunc = true;
+    }
+    return result;
+  };
+};
 _.memoize = function () {};
 _.delay = function () {};
 _.shuffle = function (list) {
