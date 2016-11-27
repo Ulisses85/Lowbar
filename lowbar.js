@@ -119,12 +119,42 @@ _.contains = function (collection, target) {
   }, false);
 };
 _.every = function (collection, iterator) {
-  iterator = iterator || _.identity;
-  return !!_.reduce(collection, function (accumulator, value) {
-    return accumulator && iterator(value);
-  }, true);
+  if (iterator === undefined) {
+    var trueStatements1 = [];
+    for (var j = 0; j < collection.length; j++) {
+      if (collection[j]) {
+        trueStatements1.push(collection[j]);
+      }
+    }
+    return trueStatements1.length === collection.length;
+  } else {
+    var trueStatements = [];
+    for (var i = 0; i < collection.length; i++) {
+      if (iterator(collection[i])) {
+        trueStatements.push(iterator(collection[i]));
+      }
+    }
+    return trueStatements.length === collection.length;
+  }
 };
-_.some = function () {};
+_.some = function (collection, iterator) {
+  if (iterator === undefined) {
+    return (_.indexOf(collection,true) > -1) ? true : false;
+  } else {
+    var all = _.every(collection, iterator);
+    if (all) {
+      return true;
+    } else {
+      return _.every(collection, function (x) {
+        if (!iterator(x)) {
+          return true;
+        } else {
+          return false;
+        }
+      }) ? false:true;
+    }
+  }
+};
 _.extends = function (obj) {
   _.each(arguments, function (argObject) {
     _.each(argObject, function (value, key) {
@@ -133,7 +163,35 @@ _.extends = function (obj) {
   });
   return obj;
 };
-_.defaults = function () {};
+_.defaults = function (obj) {
+  if (Object.keys(obj).length === 0) {
+    var t = arguments;
+    for (var f = (arguments.length - 1); f >= 0; f--) {
+      for (var r in t[f]) {
+        obj[r] = t[f][r];
+      }
+    }
+    return obj;
+  } else {
+    var x = Object.keys(arguments[0]);
+    for (var k = 0; k < x.length; k++) {
+      for (var z = 1; z < arguments.length; z++) {
+        for (var j in arguments[z]) {
+          if (x[k] === j) {
+            delete arguments[z][j];
+          }
+        }
+      }
+    }
+    var t = arguments;
+    for (var i = 1; i < arguments.length; i++) {
+      for (var r in t[i]) {
+        obj[r] = t[i][r];
+      }
+    }
+    return obj;
+  }
+};
 _.once = function (func) {
   var callFunc = false;
   var result;
@@ -158,7 +216,6 @@ _.shuffle = function (list) {
   }
   return result;
 };
-
 _.invoke = function () {};
 _.sortBy = function () {};
 _.zip = function () {};

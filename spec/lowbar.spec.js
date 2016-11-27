@@ -213,7 +213,7 @@ describe('_', function () {
       expect(shuffled).to.not.eql([11, 20, 33, 40]);
     });
   });
-  describe('every', function () {
+  describe('_.every', function () {
     var isEven = function (num) {
       return num % 2 === 0;
     };
@@ -236,6 +236,77 @@ describe('_', function () {
     it('should cast the result to a boolean', function () {
       expect(_.every([1], _.identity)).to.be.true;
       expect(_.every([0], _.identity)).to.be.false;
+    });
+  });
+  describe('_.some', function () {
+    var isEven = function (number) {
+      return number % 2 === 0;
+    };
+    it('should fail by default for an empty collection', function () {
+      expect(_.some([])).to.be.false;
+    });
+    it('should pass for a collection of all-truthy results', function () {
+      expect(_.some([true, {}, 1], _.identity)).to.be.true;
+    });
+    it('should fail for a collection of all-falsy results', function () {
+      expect(_.some([null, 0, undefined], _.identity)).to.be.false;
+    });
+    it('should pass for a collection containing mixed falsy and truthy results', function () {
+      expect(_.some([true, false, 1], _.identity)).to.be.true;
+    });
+    it('should pass for a set containing one truthy value that is a string', function () {
+      expect(_.some([null, 0, 'yes', false], _.identity)).to.be.true;
+    });
+    it('should fail for a set containing no matching values', function () {
+      expect(_.some([1, 11, 29], isEven)).to.be.false;
+    });
+    it('should pass for a collection containing one matching value', function () {
+      expect(_.some([1, 10, 29], isEven)).to.be.true;
+    });
+    it('should convert the result to a boolean', function () {
+      expect(_.some([1], _.identity)).to.be.true;
+      expect(_.some([0], _.identity)).to.be.false;
+    });
+  });
+  describe('_.defaults', function () {
+    it('returns the first argument', function () {
+      var to = {};
+      var from = {};
+      var defaulted = _.defaults(to, from);
+      expect(defaulted).to.equal(to);
+    });
+    it('should copy a property if that key is already set on the target', function () {
+      var to = {};
+      var from = { a: 1 };
+      var defaulted = _.defaults(to, from);
+
+      expect(defaulted.a).to.equal(1);
+    });
+    it('should not copy a property if that key is already set on the target', function () {
+      var to = { a: 10 };
+      var from = { a: 1 };
+      var defaulted = _.defaults(to, from);
+      expect(defaulted.a).to.equal(10);
+    });
+
+    it('gets first value of an object that has the same key', function () {
+      var to = {};
+      var from = { a: 1 };
+      var alsoFrom = { a: 2 };
+      var defaulted = _.defaults(to, from, alsoFrom);
+      expect(defaulted.a).to.equal(1);
+    });
+  });
+  describe('once', function () {
+    it('should only run a user-defined function if it hasn\'t been run before', function () {
+      var num = 1;
+      var increment = _.once(function () {
+        num += 2;
+      });
+      increment();
+      increment();
+      increment();
+      expect(num).to.equal(3);
     });
   });
 });
