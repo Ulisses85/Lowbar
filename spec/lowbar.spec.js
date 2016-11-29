@@ -268,6 +268,14 @@ describe('_', function () {
       expect(_.some([0], _.identity)).to.be.false;
     });
   });
+  describe('_.extends', function () {
+    it('returns the first argument', function () {
+      var to = {};
+      var from = {};
+      var extended = _.extends(to, from);
+      expect(extended).to.equal(to);
+    });
+  });
   describe('_.defaults', function () {
     it('returns the first argument', function () {
       var to = {};
@@ -297,7 +305,7 @@ describe('_', function () {
       expect(defaulted.a).to.equal(1);
     });
   });
-  describe('once', function () {
+  describe('_.once', function () {
     it('should only run a user-defined function if it hasn\'t been run before', function () {
       var num = 1;
       var increment = _.once(function () {
@@ -307,6 +315,25 @@ describe('_', function () {
       increment();
       increment();
       expect(num).to.equal(3);
+    });
+  });
+  describe('_.sortBy', function () {
+    it('should sort by age', function () {
+      var people = [{name: 'curly', age: 50}, {name: 'moe', age: 30}];
+      people = _.sortBy(people, function (person) {
+        return person.age;
+      });
+      expect(_.pluck(people, 'name')).to.equal(['moe', 'curly']);
+    });
+    it('should handle undefined values', function () {
+      var collection = [undefined, 4, 1, undefined, 3, 2];
+      var result = _.sortBy(collection, function (i) { return i; });
+      expect(result).to.equal([1, 2, 3, 4, undefined, undefined]);
+    });
+    it('should sort by length', function () {
+      var collection = ['one', 'two', 'three', 'four', 'five'];
+      var sort = _.sortBy(collection, 'length');
+      expect(sort).to.equal(['one', 'two', 'four', 'five', 'three']);
     });
   });
 });
