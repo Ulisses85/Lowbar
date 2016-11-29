@@ -336,7 +336,7 @@ describe('_', function () {
       expect(sort).to.equal(['one', 'two', 'four', 'five', 'three']);
     });
   });
-  describe('difference', function () {
+  describe('_.difference', function () {
     it('should compare and return the difference between two arrays', function () {
       var difference = _.difference([4, 5, 6], [5, 50, 60]);
       expect(difference).to.eql([4, 6]);
