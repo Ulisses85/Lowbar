@@ -13,7 +13,6 @@ _.first = function (array, item) {
 };
 
 _.last = function (array, item) {
-  // TODO: Refactor to do the same as _.first
   if (!item) {
     return array[array.length - 1];
   } else {
@@ -151,7 +150,7 @@ _.some = function (collection, iterator) {
         } else {
           return false;
         }
-      }) ? false:true;
+      }) ? false : true;
     }
   }
 };
@@ -203,7 +202,18 @@ _.once = function (func) {
     return result;
   };
 };
-_.memoize = function () {};
+_.memoize = function (func) {
+  var cache = {},
+    result;
+  var args = Array.prototype.slice.call(arguments);
+  return function () {
+    if (args in cache) {
+      return cache[args];
+    } else {
+      return cache[args] = func.apply(this, arguments);
+    }
+  };
+};
 _.delay = function () {};
 _.shuffle = function (list) {
   var shuffled = [];
@@ -221,7 +231,8 @@ _.sortBy = function () {};
 _.zip = function () {};
 _.flatten = function () {};
 _.intersection = function () {};
-_.difference = function () {};
+_.difference = function () {
+};
 _.throttle = function () {};
 
 if (typeof module !== 'undefined') {

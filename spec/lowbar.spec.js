@@ -339,11 +339,32 @@ describe('_', function () {
   describe('_.difference', function () {
     it('should compare and return the difference between two arrays', function () {
       var difference = _.difference([4, 5, 6], [5, 50, 60]);
-      expect(difference).to.eql([4, 6]);
+      expect(difference).to.equal([4, 6]);
     });
     it('should return the difference between more than one array', function () {
       var difference = _.difference([1, 2, 3, 4, 5], [5, 80, 40], [2, 11, 111]);
-      expect(difference).to.eql([3, 4]);
+      expect(difference).to.equal([1, 3, 4]);
+    });
+  });
+  describe('_.memoize', function () {
+    var add, memoAdd;
+    beforeEach(function () {
+      add = function (a, b) {
+        return a + b;
+      };
+      memoAdd = _.memoize(add);
+    });
+    it('has the same result as the not memoized version', function () {
+      expect(add(2, 6)).to.equal(8);
+      expect(memoAdd(2, 6)).to.equal(8);
+    });
+    it('should not run the memoized function twice for any given set of arguments', function () {
+      var spy = sinon.spy(function () { return 'whatever'; });
+      var spied = _.memoize(spy);
+      spied(22);
+      expect(spy).to.have.been.calledOnce;
+      spied(22);
+      expect(spy).to.have.been.calledOnce;
     });
   });
 });
