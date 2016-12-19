@@ -339,11 +339,19 @@ describe('_', function () {
   describe('_.difference', function () {
     it('should compare and return the difference between two arrays', function () {
       var difference = _.difference([4, 5, 6], [5, 50, 60]);
-      expect(difference).to.equal([4, 6]);
+      expect(difference).to.eql([4, 6, 50, 60]);
     });
     it('should return the difference between more than one array', function () {
       var difference = _.difference([1, 2, 3, 4, 5], [5, 80, 40], [2, 11, 111]);
-      expect(difference).to.equal([1, 3, 4]);
+      expect(difference).to.eql([1, 2, 3, 4, 80, 40]);
+    });
+    it('should return the difference between arrays containing strings', function () {
+      var difference = _.difference(['Lukasz', 'Adam', 'Chris'], ['Lukasz', 'Adam', 'Jason']);
+      expect(difference).to.eql(['Chris', 'Jason']);
+    });
+    it('should return the difference between arrays containing different data types', function () {
+      var difference = _.difference(['Lukasz', 'Adam', 'Chris'], ['Lukasz', 'Adam', 1]);
+      expect(difference).to.eql(['Chris', 1]);
     });
   });
   describe('_.memoize', function () {
@@ -365,6 +373,11 @@ describe('_', function () {
       expect(spy).to.have.been.calledOnce;
       spied(22);
       expect(spy).to.have.been.calledOnce;
+    });
+  });
+  describe('_.invoke', function () {
+    it('should compare and return the difference between two arrays', function () {
+      expect(_.invoke([[5, 1, 7], [3, 2, 1]], 'sort')).to.equal([[1, 5, 7], [1, 2, 3]]);
     });
   });
 });
