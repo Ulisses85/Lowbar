@@ -214,7 +214,7 @@ _.memoize = function (func) {
     }
   };
 };
-_.delay = function () {};
+_.delay = function (func, extrArg) {};
 _.shuffle = function (list) {
   var shuffled = [];
   var listCopy = Array.prototype.slice.call(list);
@@ -231,7 +231,19 @@ _.sortBy = function () {};
 _.zip = function () {};
 _.flatten = function () {};
 _.intersection = function () {};
-_.difference = function () {
+_.difference = function (array1, array2) {
+  var result = [];
+  for (var i = 0; i < array1.length; i++) {
+    if (array2.indexOf(array1[i]) === -1) {
+      result.push(array1[i]);
+    }
+  }
+  for (i = 0; i < array2.length; i++) {
+    if (array1.indexOf(array2[i]) === -1) {
+      result.push(array2[i]);
+    }
+  }
+  return result;
 };
 _.throttle = function () {};
 
