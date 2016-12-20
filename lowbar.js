@@ -229,7 +229,18 @@ _.shuffle = function (list) {
 _.invoke = function () {};
 _.sortBy = function () {};
 _.zip = function () {};
-_.flatten = function () {};
+_.flatten = function flatten (list, result) {
+  result = [];
+  for (var i = 0; i < list.length; i++) {
+    var current = list[i];
+    if (Array.isArray(current)) {
+      result.push.apply(list, flatten(current));
+    } else {
+      result.push(current);
+    }
+  }
+  return result;
+};
 _.intersection = function () {};
 _.difference = function (array1, array2) {
   var result = [];
