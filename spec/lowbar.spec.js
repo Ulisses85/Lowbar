@@ -375,6 +375,23 @@ describe('_', function () {
       expect(spy).to.have.been.calledOnce;
     });
   });
+  describe('_.flatten', function () {
+    it('should return unmodified array if not nested list passed', function () {
+      var unNested = [1, 2, 3, 4];
+      var flatten = _.flatten(unNested);
+      expect(flatten).to.eql([1, 2, 3, 4]);
+    });
+    it('should flatten nested array correctly', function () {
+      var nested = [1, [2], [3, [[[4]]]]];
+      var flatten = _.flatten(nested);
+      expect(flatten).to.eql([1, 2, 3, 4]);
+    });
+    it('should flatten array with different data types correctly', function () {
+      var nested1 = [1, [2], ['Adam', [[['Lukasz']]]]];
+      var flatten = _.flatten(nested1);
+      expect(flatten).to.eql([1, 2, 'Adam', 'Lukasz']);
+    });
+  });
   describe('_.invoke', function () {
     it('should compare and return the difference between two arrays', function () {
       expect(_.invoke([[5, 1, 7], [3, 2, 1]], 'sort')).to.equal([[1, 5, 7], [1, 2, 3]]);
