@@ -362,6 +362,9 @@ describe('_', function () {
       };
       memoAdd = _.memoize(add);
     });
+    it('should be a function', function () {
+      expect(_.memoize).to.be.a('function');
+    });
     it('has the same result as the not memoized version', function () {
       expect(add(2, 6)).to.equal(8);
       expect(memoAdd(2, 6)).to.equal(8);
@@ -392,6 +395,34 @@ describe('_', function () {
       expect(flatten).to.eql([1, 2, 'Adam', 'Lukasz']);
     });
   });
+  describe('_.delay', function () {
+    function call () { console.log('delay'); }
+    it('should be a function', function () {
+      expect(_.delay).to.be.a('function');
+    });
+    it('should take two arguments', function () {
+      expect(_.delay.length).to.equal(2);
+    });
+    it('should not return anything', function () {
+      expect(_.delay(call, 1000)).to.be.undefined;
+    });
+  });
+  describe('_.intersection', function () {
+    it('should be a function', function () {
+      expect(_.intersection).to.be.a('function');
+    });
+    it('should take the set intersection of the two arrays', function () {
+      var students = ['Lukasz', 'Adam', 'Chris'];
+      var freshers = ['Lukasz', 'Tague', 'Dave'];
+      expect(_.intersection(students, freshers)).to.eql(['Lukasz']);
+    });
+    it('should take the set intersection of the two arrays with different data types', function () {
+      var students = [1, 'Lukasz', 'Adam', 'Chris'];
+      var freshers = [1, 'Lukasz', 'Tague', 'Dave'];
+      expect(_.intersection(students, freshers)).to.eql([1, 'Lukasz']);
+    });
+  });
+
   describe('_.invoke', function () {
     it('should compare and return the difference between two arrays', function () {
       expect(_.invoke([[5, 1, 7], [3, 2, 1]], 'sort')).to.equal([[1, 5, 7], [1, 2, 3]]);

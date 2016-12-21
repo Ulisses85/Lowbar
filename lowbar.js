@@ -214,7 +214,12 @@ _.memoize = function (func) {
     }
   };
 };
-_.delay = function (func, extrArg) {};
+_.delay = function (func, wait) {
+  var args = Array.prototype.slice.call(arguments, 2);
+  setTimeout(function () {
+    func.apply(this, args);
+  }, wait);
+};
 _.shuffle = function (list) {
   var shuffled = [];
   var listCopy = Array.prototype.slice.call(list);
@@ -241,7 +246,19 @@ _.flatten = function flatten (list, result) {
   }
   return result;
 };
-_.intersection = function () {};
+_.intersection = function (list) {
+  var result = [];
+  var argsLength = arguments.length;
+  for (var i = 0, length = list.length; i < length; i++) {
+    var item = list[i];
+    if (_.contains(result, item)) continue;
+    for (var j = 1; j < argsLength; j++) {
+      if (!_.contains(arguments[j], item)) break;
+    }
+    if (j === argsLength) result.push(item);
+  }
+  return result;
+};
 _.difference = function (array1, array2) {
   var result = [];
   for (var i = 0; i < array1.length; i++) {
