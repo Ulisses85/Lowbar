@@ -232,7 +232,31 @@ _.shuffle = function (list) {
   return result;
 };
 _.invoke = function () {};
-_.sortBy = function () {};
+_.sortBy = function (collection, iterator) {
+  if (typeof iterator === 'string') {
+    return collection.sort(function (a, b) {
+      if (a[iterator] > b[iterator]) {
+        return 1;
+      } else if (a[iterator] < b[iterator]) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+  } else if (typeof iterator === 'function') {
+    return collection.sort(function (a, b) {
+      if (iterator(a) > iterator(b)) {
+        return 1;
+      } else if (iterator(a) < iterator(b)) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+  } else {
+    return collection;
+  }
+};
 _.zip = function () {};
 _.flatten = function flatten (list, result) {
   result = [];
