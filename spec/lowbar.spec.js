@@ -323,17 +323,17 @@ describe('_', function () {
       people = _.sortBy(people, function (person) {
         return person.age;
       });
-      expect(_.pluck(people, 'name')).to.equal(['moe', 'curly']);
+      expect(_.pluck(people, 'name')).to.eql(['moe', 'curly']);
     });
     it('should handle undefined values', function () {
       var collection = [undefined, 4, 1, undefined, 3, 2];
       var result = _.sortBy(collection, function (i) { return i; });
-      expect(result).to.equal([1, 2, 3, 4, undefined, undefined]);
+      expect(result).to.eql([1, 2, 3, 4, undefined, undefined]);
     });
     it('should sort by length', function () {
       var collection = ['one', 'two', 'three', 'four', 'five'];
       var sort = _.sortBy(collection, 'length');
-      expect(sort).to.equal(['one', 'two', 'four', 'five', 'three']);
+      expect(sort).to.eql(['one', 'two', 'four', 'five', 'three']);
     });
   });
   describe('_.difference', function () {
@@ -422,7 +422,16 @@ describe('_', function () {
       expect(_.intersection(students, freshers)).to.eql([1, 'Lukasz']);
     });
   });
-
+  describe('_.zip', function () {
+    it('should be a function', function () {
+      expect(_.zip).to.be.a('function');
+    });
+    it('should zip two arrays together in one array', function () {
+      var list1 = [1, 2, 3];
+      var list2 = [4, 5, 6];
+      expect(_.zip(list1, list2)).to.equal([1, 2, 3, 4, 5, 6]);
+    });
+  });
   describe('_.invoke', function () {
     it('should compare and return the difference between two arrays', function () {
       expect(_.invoke([[5, 1, 7], [3, 2, 1]], 'sort')).to.equal([[1, 5, 7], [1, 2, 3]]);
