@@ -154,7 +154,7 @@ _.some = function (collection, iterator) {
     }
   }
 };
-_.extends = function (obj) {
+_.extend = function (obj) {
   _.each(arguments, function (argObject) {
     _.each(argObject, function (value, key) {
       obj[key] = value;
