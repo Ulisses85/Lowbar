@@ -231,7 +231,17 @@ _.shuffle = function (list) {
   }
   return result;
 };
-_.invoke = function () {};
+_.invoke = function (collection, method, argument) {
+  if (typeof method === 'string') {
+    return _.map(collection, function (val, key) {
+      return val[method](argument);
+    });
+  } else if (typeof method === 'function') {
+    return _.map(collection, function (val, key) {
+      return method.apply(val, argument);
+    });
+  }
+};
 _.sortBy = function (collection, iterator) {
   if (typeof iterator === 'string') {
     return collection.sort(function (a, b) {
