@@ -76,6 +76,9 @@ describe('_', function () {
     });
   });
   describe('_.indexOf', function () {
+    it('is a function', function () {
+      expect(_.indexOf).to.be.a('function');
+    });
     it('Returns the index at which value can be found', function () {
       expect(_.indexOf([10, 20, 30, 40, 50], 20)).to.equal(1);
     });
@@ -107,6 +110,9 @@ describe('_', function () {
     });
   });
   describe('_.reject', function () {
+    it('is a function', function () {
+      expect(_.reject).to.be.a('function');
+    });
     it('Returns the values in list without the elements that pass the truth test', function () {
       var result = _.reject([1, 2, 3, 4, 5], function (num) {
         return num % 2 === 0;
@@ -127,7 +133,7 @@ describe('_', function () {
     });
   });
   describe('_.uniq', function () {
-    it('Is a function', function () {
+    it('is a function', function () {
       expect(_.uniq).to.be.a('function');
     });
     it('Returns a duplicate free version of the array using the first entry as the value', function () {
@@ -136,7 +142,7 @@ describe('_', function () {
     });
   });
   describe('_.map', function () {
-    it('Should be a function', function () {
+    it('is a function', function () {
       expect(_.map).to.be.a('function');
     });
     it('should take two arguements', function () {
@@ -155,7 +161,10 @@ describe('_', function () {
     });
   });
   describe('_.pluck', function () {
-    it('is a function which takes two arguements', function () {
+    it('is a function', function () {
+      expect(_.pluck).to.be.a('function');
+    });
+    it('function takes two arguements', function () {
       expect(_.pluck.length).to.equal(2);
     });
     it('returns an array of values', function () {
@@ -196,6 +205,9 @@ describe('_', function () {
     });
   });
   describe('_.shuffle', function () {
+    it('is a function', function () {
+      expect(_.shuffle).to.be.a('function');
+    });
     it('original object should not be modified', function () {
       var list = [11, 20, 33, 40];
       var shuffled = _.shuffle(list).sort();
@@ -214,6 +226,9 @@ describe('_', function () {
     });
   });
   describe('_.every', function () {
+    it('is a function', function () {
+      expect(_.every).to.be.a('function');
+    });
     var isEven = function (num) {
       return num % 2 === 0;
     };
@@ -239,6 +254,9 @@ describe('_', function () {
     });
   });
   describe('_.some', function () {
+    it('is a function', function () {
+      expect(_.some).to.be.a('function');
+    });
     var isEven = function (number) {
       return number % 2 === 0;
     };
@@ -269,6 +287,9 @@ describe('_', function () {
     });
   });
   describe('_.extend', function () {
+    it('is a function', function () {
+      expect(_.extend).to.be.a('function');
+    });
     it('returns the first argument', function () {
       var to = {};
       var from = {};
@@ -285,6 +306,9 @@ describe('_', function () {
     });
   });
   describe('_.defaults', function () {
+    it('is a function', function () {
+      expect(_.defaults).to.be.a('function');
+    });
     it('returns the first argument', function () {
       var to = {};
       var from = {};
@@ -314,6 +338,9 @@ describe('_', function () {
     });
   });
   describe('_.once', function () {
+    it('is a function', function () {
+      expect(_.once).to.be.a('function');
+    });
     it('should only run a user-defined function if it hasn\'t been run before', function () {
       var num = 1;
       var increment = _.once(function () {
@@ -326,6 +353,9 @@ describe('_', function () {
     });
   });
   describe('_.sortBy', function () {
+    it('is a function', function () {
+      expect(_.sortBy).to.be.a('function');
+    });
     it('should sort by age', function () {
       var people = [{name: 'curly', age: 50}, {name: 'moe', age: 30}];
       people = _.sortBy(people, function (person) {
@@ -345,6 +375,9 @@ describe('_', function () {
     });
   });
   describe('_.difference', function () {
+    it('is a function', function () {
+      expect(_.difference).to.be.a('function');
+    });
     it('should compare and return the difference between two arrays', function () {
       var difference = _.difference([4, 5, 6], [5, 50, 60]);
       expect(difference).to.eql([4, 6, 50, 60]);
@@ -363,6 +396,9 @@ describe('_', function () {
     });
   });
   describe('_.memoize', function () {
+    it('is a function', function () {
+      expect(_.memoize).to.be.a('function');
+    });
     var add, memoAdd;
     beforeEach(function () {
       add = function (a, b) {
@@ -387,6 +423,9 @@ describe('_', function () {
     });
   });
   describe('_.flatten', function () {
+    it('is a function', function () {
+      expect(_.flatten).to.be.a('function');
+    });
     it('should return unmodified array if not nested list passed', function () {
       var unNested = [1, 2, 3, 4];
       var flatten = _.flatten(unNested);
@@ -404,6 +443,9 @@ describe('_', function () {
     });
   });
   describe('_.delay', function () {
+    it('is a function', function () {
+      expect(_.delay).to.be.a('function');
+    });
     function call () { console.log('delay'); }
     it('should be a function', function () {
       expect(_.delay).to.be.a('function');
@@ -434,11 +476,6 @@ describe('_', function () {
     it('should be a function', function () {
       expect(_.zip).to.be.a('function');
     });
-    it('should zip two arrays together in one array', function () {
-      var list1 = [1, 2, 3];
-      var list2 = [4, 5, 6];
-      expect(_.zip(list1, list2)).to.equal([1, 2, 3, 4, 5, 6]);
-    });
   });
   describe('_.invoke', function () {
     it('should be a function', function () {
@@ -463,6 +500,11 @@ describe('_', function () {
       var collection = [[6, 2, 8], [3, 2, 1]];
       var res = _.invoke(collection, Array.prototype.sort);
       expect(res[1]).to.eql([1, 2, 3]);
+    });
+  });
+  describe('_.throttle', function () {
+    it('should be a function', function () {
+      expect(_.throttle).to.be.a('function');
     });
   });
 });
