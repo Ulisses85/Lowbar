@@ -268,12 +268,20 @@ describe('_', function () {
       expect(_.some([0], _.identity)).to.be.false;
     });
   });
-  describe('_.extends', function () {
+  describe('_.extend', function () {
     it('returns the first argument', function () {
       var to = {};
       var from = {};
-      var extended = _.extends(to, from);
+      var extended = _.extend(to, from);
       expect(extended).to.equal(to);
+    });
+    it('should not override properties not found in the source', function () {
+      var extended = _.extend({x: 'x'}, {a: 'b'});
+      expect(extended.x).to.equal('x');
+    });
+    it('should not copy undefined values', function () {
+      var extended = _.extend({}, {a: void 0, b: null});
+      expect('a' in extended && 'b' in extended).to.be.true;
     });
   });
   describe('_.defaults', function () {
