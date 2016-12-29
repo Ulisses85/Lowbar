@@ -433,8 +433,28 @@ describe('_', function () {
     });
   });
   describe('_.invoke', function () {
-    it('should compare and return the difference between two arrays', function () {
-      expect(_.invoke([[5, 1, 7], [3, 2, 1]], 'sort')).to.equal([[1, 5, 7], [1, 2, 3]]);
+    it('should be a function', function () {
+      expect(_.invoke).to.be.a('function');
+    });
+    it('should sort the first array', function () {
+      var collection = [[6, 2, 8], [3, 2, 1]];
+      var res = _.invoke(collection, 'sort');
+      expect(res[0]).to.eql([2, 6, 8]);
+    });
+    it('should sort the second array', function () {
+      var collection = [[6, 2, 8], [3, 2, 1]];
+      var res = _.invoke(collection, 'sort');
+      expect(res[1]).to.eql([1, 2, 3]);
+    });
+    it('should sort the first array when the function is taken as a reference', function () {
+      var collection = [[6, 2, 8], [3, 2, 1]];
+      var res = _.invoke(collection, Array.prototype.sort);
+      expect(res[0]).to.eql([2, 6, 8]);
+    });
+    it('should sort the second array,when the function is taken as a reference', function () {
+      var collection = [[6, 2, 8], [3, 2, 1]];
+      var res = _.invoke(collection, Array.prototype.sort);
+      expect(res[1]).to.eql([1, 2, 3]);
     });
   });
 });
