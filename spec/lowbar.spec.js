@@ -476,6 +476,26 @@ describe('_', function () {
     it('should be a function', function () {
       expect(_.zip).to.be.a('function');
     });
+    it('should return an data type of an array', function () {
+    var names = ['moe', 'larry', 'curly'], ages = [30, 40, 50], booleans = [true, false, false];
+      expect(_.zip(names, ages, booleans)).to.be.an('array');
+    });
+    it('should zip together arrays of the same length', function () {
+    var names = ['moe', 'larry', 'curly'], ages = [30, 40, 50], booleans = [true, false, false];
+      expect(_.zip(names, ages, booleans)).to.eql([
+          ['moe', 30, true],
+          ['larry', 40, false],
+          ['curly', 50, false]
+      ]);
+    });
+    it('should zip together arrays of the differenth length', function () {
+    var names = ['moe', 'larry', 'curly'], ages = [30, 40, 50], booleans = [true];
+      expect(_.zip(names, ages, booleans)).to.eql([
+          ['moe', 30, true],
+          ['larry', 40, undefined],
+          ['curly', 50, undefined]
+      ]);
+    });
   });
   describe('_.invoke', function () {
     it('should be a function', function () {
