@@ -108,6 +108,7 @@ _.each = function (collection, iterator) {
     }
   }
 };
+
 _.contains = function (collection, target) {
   return _.reduce(collection, function (match, item) {
     if (match) {
@@ -117,6 +118,7 @@ _.contains = function (collection, target) {
     }
   }, false);
 };
+
 _.every = function (collection, iterator) {
   if (iterator === undefined) {
     var trueStatements1 = [];
@@ -136,6 +138,7 @@ _.every = function (collection, iterator) {
     return trueStatements.length === collection.length;
   }
 };
+
 _.some = function (collection, iterator) {
   if (iterator === undefined) {
     return (_.indexOf(collection,true) > -1) ? true : false;
@@ -154,6 +157,7 @@ _.some = function (collection, iterator) {
     }
   }
 };
+
 _.extend = function (obj) {
   _.each(arguments, function (argObject) {
     _.each(argObject, function (value, key) {
@@ -162,6 +166,7 @@ _.extend = function (obj) {
   });
   return obj;
 };
+
 _.defaults = function (obj) {
   if (Object.keys(obj).length === 0) {
     var t = arguments;
@@ -191,6 +196,7 @@ _.defaults = function (obj) {
     return obj;
   }
 };
+
 _.once = function (func) {
   var callFunc = false;
   var result;
@@ -202,6 +208,7 @@ _.once = function (func) {
     return result;
   };
 };
+
 _.memoize = function (func) {
   var cache = {},
     result;
@@ -214,12 +221,14 @@ _.memoize = function (func) {
     }
   };
 };
+
 _.delay = function (func, wait) {
   var args = Array.prototype.slice.call(arguments, 2);
   setTimeout(function () {
     func.apply(this, args);
   }, wait);
 };
+
 _.shuffle = function (list) {
   var shuffled = [];
   var listCopy = Array.prototype.slice.call(list);
@@ -231,6 +240,7 @@ _.shuffle = function (list) {
   }
   return result;
 };
+
 _.invoke = function (collection, method, argument) {
   if (typeof method === 'string') {
     return _.map(collection, function (val, key) {
@@ -242,6 +252,7 @@ _.invoke = function (collection, method, argument) {
     });
   }
 };
+
 _.sortBy = function (collection, iterator) {
   if (typeof iterator === 'string') {
     return collection.sort(function (a, b) {
@@ -267,7 +278,19 @@ _.sortBy = function (collection, iterator) {
     return collection;
   }
 };
-_.zip = function () {};
+
+_.zip = function (arrays) {
+  var list = [].slice.call(arguments);
+  var longestArr = list.reduce(function (a, b) {
+    return a.length > b.length ? a : b;
+  }, []);
+  return longestArr.map(function (_, i) {
+    return list.map(function (array) {
+      return array[i];
+    });
+  });
+};
+
 _.flatten = function flatten (list, result) {
   result = [];
   for (var i = 0; i < list.length; i++) {
@@ -280,6 +303,7 @@ _.flatten = function flatten (list, result) {
   }
   return result;
 };
+
 _.intersection = function (list) {
   var result = [];
   var argsLength = arguments.length;
@@ -293,6 +317,7 @@ _.intersection = function (list) {
   }
   return result;
 };
+
 _.difference = function (array1, array2) {
   var result = [];
   for (var i = 0; i < array1.length; i++) {
@@ -307,6 +332,7 @@ _.difference = function (array1, array2) {
   }
   return result;
 };
+
 _.throttle = function () {};
 
 if (typeof module !== 'undefined') {
