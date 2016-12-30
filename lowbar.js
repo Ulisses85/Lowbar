@@ -279,8 +279,8 @@ _.sortBy = function (collection, iterator) {
   }
 };
 
-_.zip = function (arrays) {
-  var list = [].slice.call(arguments);
+_.zip = function (list) {
+  list = [].slice.call(arguments);
   var longestArr = list.reduce(function (a, b) {
     return a.length > b.length ? a : b;
   }, []);
