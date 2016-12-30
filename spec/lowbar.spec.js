@@ -476,7 +476,7 @@ describe('_', function () {
     it('should be a function', function () {
       expect(_.zip).to.be.a('function');
     });
-    it('should return an data type of an array', function () {
+    it('should return an array', function () {
     var names = ['moe', 'larry', 'curly'], ages = [30, 40, 50], booleans = [true, false, false];
       expect(_.zip(names, ages, booleans)).to.be.an('array');
     });
