@@ -526,5 +526,35 @@ describe('_', function () {
     it('should be a function', function () {
       expect(_.throttle).to.be.a('function');
     });
+    it('should take 2 arguments', function () {
+      expect(_.throttle.length).to.equal(2);
+    });
+    it('throttled functions return their value', function (done) {
+      var counter = 0;
+      var incr = function () {
+        return ++counter;
+      };
+      var throttledIncr = _.throttle(incr, 32);
+      var result = throttledIncr();
+      setTimeout(function () {
+        expect(result).to.eql(1);
+        expect(counter).to.eql(1);
+        done();
+      }, 64);
+    });
+    it('should return a function callable twice in the first 200ms', function () {
+      var callback;
+      beforeEach(function () {
+        callback = sinon.spy();
+        var fn = _.throttle(callback, 100);
+        fn();
+        setTimeout(fn, 50);
+        setTimeout(fn, 100);
+        setTimeout(fn, 150);
+        setTimeout(fn, 199);
+        clock.tick(200);
+        expect(callback).to.have.been.calledTwice;
+      });
+    });
   });
 });
