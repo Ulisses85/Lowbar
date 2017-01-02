@@ -333,7 +333,19 @@ _.difference = function (array1, array2) {
   return result;
 };
 
-_.throttle = function () {};
+_.throttle = function (fun, delay) {
+  var next = 0;
+  var now = 0;
+  var result;
+  return () => {
+    now = Date.now();
+    if (now >= next) {
+      result = fun.apply(this, arguments);
+      next = now + delay;
+    }
+    return result;
+  };
+};
 
 if (typeof module !== 'undefined') {
   module.exports = _;
