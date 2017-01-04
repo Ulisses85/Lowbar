@@ -406,7 +406,7 @@ describe('_', function () {
       };
       memoAdd = _.memoize(add);
     });
-    it('should be a function', function () {
+    it('is a function', function () {
       expect(_.memoize).to.be.a('function');
     });
     it('has the same result as the not memoized version', function () {
@@ -447,7 +447,7 @@ describe('_', function () {
       expect(_.delay).to.be.a('function');
     });
     function call () { console.log('delay'); }
-    it('should be a function', function () {
+    it('is a function', function () {
       expect(_.delay).to.be.a('function');
     });
     it('should take two arguments', function () {
@@ -458,7 +458,7 @@ describe('_', function () {
     });
   });
   describe('_.intersection', function () {
-    it('should be a function', function () {
+    it('is a function', function () {
       expect(_.intersection).to.be.a('function');
     });
     it('should take the set intersection of the two arrays', function () {
@@ -473,7 +473,7 @@ describe('_', function () {
     });
   });
   describe('_.zip', function () {
-    it('should be a function', function () {
+    it('is a function', function () {
       expect(_.zip).to.be.a('function');
     });
     it('should return an array', function () {
@@ -498,7 +498,7 @@ describe('_', function () {
     });
   });
   describe('_.invoke', function () {
-    it('should be a function', function () {
+    it('is a function', function () {
       expect(_.invoke).to.be.a('function');
     });
     it('should sort the first array', function () {
@@ -523,7 +523,7 @@ describe('_', function () {
     });
   });
   describe('_.throttle', function () {
-    it('should be a function', function () {
+    it('is a function', function () {
       expect(_.throttle).to.be.a('function');
     });
     it('should take 2 arguments', function () {
