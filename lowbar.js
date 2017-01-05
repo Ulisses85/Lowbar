@@ -230,7 +230,6 @@ _.delay = function (func, wait) {
 };
 
 _.shuffle = function (list) {
-  var shuffled = [];
   var listCopy = Array.prototype.slice.call(list);
   var result = [];
   for (var i = 0; i < list.length; i++) {
