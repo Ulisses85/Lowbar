@@ -141,7 +141,7 @@ _.every = function (collection, iterator) {
 
 _.some = function (collection, iterator) {
   if (iterator === undefined) {
-    return (_.indexOf(collection,true) > -1) ? true : false;
+    return (_.indexOf(collection, true) > -1);
   } else {
     var all = _.every(collection, iterator);
     if (all) {
@@ -187,9 +187,9 @@ _.defaults = function (obj) {
         }
       }
     }
-    var t = arguments;
+    t = arguments;
     for (var i = 1; i < arguments.length; i++) {
-      for (var r in t[i]) {
+      for (r in t[i]) {
         obj[r] = t[i][r];
       }
     }
@@ -210,14 +210,14 @@ _.once = function (func) {
 };
 
 _.memoize = function (func) {
-  var cache = {},
-    result;
+  var cache = {};
   var args = Array.prototype.slice.call(arguments);
   return function () {
     if (args in cache) {
       return cache[args];
     } else {
-      return cache[args] = func.apply(this, arguments);
+      var result = cache[args] = func.apply(this, arguments);
+      return result;
     }
   };
 };
@@ -336,7 +336,7 @@ _.throttle = function (fun, delay) {
   var next = 0;
   var now = 0;
   var result;
-  return () => {
+  return function () {
     now = Date.now();
     if (now >= next) {
       result = fun.apply(this, arguments);
